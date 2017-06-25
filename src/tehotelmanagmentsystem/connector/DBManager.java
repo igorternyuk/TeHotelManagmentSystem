@@ -84,13 +84,11 @@ public class DBManager {
 
     private void readDBSettingsFromFile(String pathToFile) throws
             UnsupportedEncodingException, IOException {
-        InputStream is = getClass().getResourceAsStream(pathToFile);
-        if(is == null){
-            System.out.println("is == null :" + (is == null));
-        }
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"))) {
+        
+        try (InputStream is = getClass().getResourceAsStream(pathToFile);
+             BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"))) {
             String str;
-            LoadState ls = LoadState.STOP;
+            LoadState ls;
             while ((str = br.readLine()) != null) {
                 if (str.equalsIgnoreCase("[Server]")) {
                     ls = LoadState.SERVER;
