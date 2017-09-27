@@ -36,13 +36,13 @@ public class PriceCalculator {
     public double getRoomCostPerDay(RoomType roomType){
         double result = 0;
         switch(roomType){
-            case SINGLE :
+            case Single :
                 result = singeRoomCostPerDay;
                 break;
-            case DOUBLE :
+            case Double :
                 result = doubleRoomCostPerDay;
                 break;
-            case FAMILY :
+            case Family :
                 result = familyRoomCostPerDay;
                 break;
         }

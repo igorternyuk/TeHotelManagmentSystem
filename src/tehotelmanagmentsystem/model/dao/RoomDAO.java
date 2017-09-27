@@ -44,7 +44,8 @@ public class RoomDAO implements DAO<Room>{
 
     @Override
     public void update(Room r) throws SQLException {
-        cmd = con.prepareStatement("update rooms set room_type = ?, isFree = ? where id = ?;");
+        cmd = con.prepareStatement("update rooms set room_type = ?,"
+                + " isFree = ? where id = ?;");
         cmd.setString(1, r.getType().toString());
         cmd.setBoolean(2, r.isIsFree());
         cmd.setInt(3, r.getId());
@@ -70,7 +71,8 @@ public class RoomDAO implements DAO<Room>{
 
     @Override
     public Room get(int id) throws SQLException, NoSuchRoomException {
-        rs = manager.executeSelect("select * from rooms where id = " + id + ";");
+        rs = manager.executeSelect("select * from rooms where id = " + id +
+                ";");
         if(rs.next()){
             return getRoomFromResultSet(rs);
         } else {

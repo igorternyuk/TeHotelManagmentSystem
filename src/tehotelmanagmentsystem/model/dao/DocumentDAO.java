@@ -36,7 +36,7 @@ public class DocumentDAO implements DAO<Document>{
     
     @Override
     public void insert(Document t) throws SQLException {
-        manager.executeUpdate("isert into doc_types values(default," +
+        manager.executeUpdate("isert into id_types values(default," +
               t.getName() +");");
     }
 
@@ -48,13 +48,13 @@ public class DocumentDAO implements DAO<Document>{
 
     @Override
     public void delete(int id) throws SQLException {
-        manager.executeUpdate("delete from doc_types where id = " + id);
+        manager.executeUpdate("delete from id_types where id = " + id);
     }
 
     @Override
     public List<Document> getCompleteList() throws SQLException {
         List<Document> list = new ArrayList<>();
-        rs = manager.executeSelect("select * from doc_types;");
+        rs = manager.executeSelect("select * from id_types;");
         while(rs.next()){
             Document doc_type = new Document();
             doc_type.setId(rs.getInt(1));
@@ -66,7 +66,7 @@ public class DocumentDAO implements DAO<Document>{
 
     @Override
     public Document get(int id) throws Exception {
-        rs = manager.executeSelect("select * from doc_types where id = " + id + ";");
+        rs = manager.executeSelect("select * from id_types where id = " + id + ";");
         if(rs.next()){
             return getIDTypeFromResultSet(rs);
         } else {

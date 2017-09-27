@@ -10,9 +10,9 @@ package tehotelmanagmentsystem.model;
  * @author igor
  */
 public enum RoomType {
-    SINGLE("SINGLE"),
-    DOUBLE("DOUBLE"),
-    FAMILY("FAMILY");
+    Single("Single"),
+    Double("Double"),
+    Family("Family");
     
     private final String type;
     

@@ -42,7 +42,7 @@ public class MainWindow extends javax.swing.JFrame {
         docTypeDAO = DocumentDAO.getInstance();
         roomDAO = RoomDAO.getInstance();
         priceCalculator = PriceCalculator.getInstance();
-        ajustGUI();
+        configureGUI();
         fillCombos();
         loadCompleteCustomerList();
 
@@ -55,13 +55,15 @@ public class MainWindow extends javax.swing.JFrame {
     }
     }
     
-    private void ajustGUI(){
+    private void configureGUI(){
         this.setTitle(TITLE_OF_PROGRAM);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         tableCustomers.setRowHeight(ROW_HEIGHT);
         tableCustomers.setAutoCreateRowSorter(true);
         configureSpinners();
+        txtCustomerRef.addKeyListener(new TextFieldInputValidator(
+                KeyListenerType.INTEGER_VALUES_ONLY));
     }
     
     private void configureSpinners(){
@@ -132,7 +134,8 @@ public class MainWindow extends javax.swing.JFrame {
         txtAdress.getText().isEmpty() ||
         txtPostcode.getText().isEmpty() ||
         txtMobile.getText().isEmpty() ||
-        txtEmail.getText().isEmpty());
+        txtEmail.getText().isEmpty() ||
+        txtNationality.getText().isEmpty());
     }
     
     private Customer getCustomerDataFromInputFields(){
@@ -146,9 +149,7 @@ public class MainWindow extends javax.swing.JFrame {
         c.setPostCode(txtPostcode.getText());
         c.setMobile(txtMobile.getText());
         c.setEmail(txtEmail.getText());
-        if(comboNationality.getItemCount() > 0){
-            c.setNationality(comboNationality.getSelectedItem().toString());
-        }
+        c.setNationality(txtNationality.getText());
         c.setDateOfBirth(new java.sql.Date(txtDateOfBirth.getDate().getTime()));
         if(comboDocument.getItemCount() > 0){
             Document doc = (Document)comboDocument.getSelectedItem();
@@ -191,7 +192,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtMobile = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtEmail = new javax.swing.JTextField();
+        txtNationality = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableCustomers = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
@@ -223,7 +224,6 @@ public class MainWindow extends javax.swing.JFrame {
         spinnerDiscount = new javax.swing.JSpinner();
         btnInsert = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
-        comboNationality = new com.toedter.components.JLocaleChooser();
         jPanel2 = new javax.swing.JPanel();
         btnFirst = new javax.swing.JToggleButton();
         btnPrevious = new javax.swing.JToggleButton();
@@ -236,50 +236,70 @@ public class MainWindow extends javax.swing.JFrame {
         spinnerAgeMAX = new javax.swing.JSpinner();
         btnSearchCustomer = new javax.swing.JButton();
         btnLast = new javax.swing.JToggleButton();
+        txtEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCheckOutDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtCheckOutDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 369, 145, 25));
 
         txtCheckInDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtCheckInDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 332, 145, 25));
 
         txtDateOfBirth.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtDateOfBirth, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 236, 145, 25));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Customer:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 14, -1, -1));
 
         txtCustomerRef.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtCustomerRef, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 12, 145, -1));
 
         txtFirstName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 39, 145, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("First name:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 41, -1, -1));
 
         txtSurname.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtSurname, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 66, 145, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Surname:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 66, -1, -1));
 
         txtAdress.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtAdress, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 93, 145, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Adress:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 95, -1, -1));
 
         txtPostcode.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtPostcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 122, 145, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Postcode:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 124, -1, -1));
 
         txtMobile.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtMobile, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 149, 145, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Customer mobile:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 151, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("E-mail");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 178, -1, -1));
 
-        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtNationality.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtNationality, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 210, 150, -1));
 
+        tableCustomers.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tableCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -298,37 +318,51 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableCustomers);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 12, 880, 330));
+
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Nationality:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 210, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Date of birth:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 236, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Document:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 267, -1, -1));
 
         comboDocument.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(comboDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 267, 145, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Gender:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 308, -1, -1));
 
         comboMeal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(comboMeal, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 400, 145, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Check in date:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 337, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("Check in out:");
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 377, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Meal:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 405, -1, -1));
 
         comboGender.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(comboGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 299, 145, -1));
 
         jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel16.setText("Room number:");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 438, -1, -1));
 
         comboRoomNumber.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(comboRoomNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 432, 145, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -452,7 +486,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,11 +521,11 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel20))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 1, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        comboNationality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Arabic (United Arab Emirates)", "Arabic (Jordan)", "Arabic (Syria)", "Croatian (Croatia)", "French (Belgium)", "Spanish (Panama)", "Maltese (Malta)", "Spanish (Venezuela)", "Chinese (Taiwan)", "Danish (Denmark)", "Spanish (Puerto Rico)", "Vietnamese (Vietnam)", "English (United States)", "Serbian (Montenegro)", "Swedish (Sweden)", "Spanish (Bolivia)", "English (Singapore)", "Arabic (Bahrain)", "Arabic (Saudi Arabia)", "Arabic (Yemen)", "Hindi (India)", "English (Malta)", "Finnish (Finland)", "Serbian (Latin", "Bosnia and Herzegovina)", "Ukrainian (Ukraine)", "French (Switzerland)", "Spanish (Argentina)", "Arabic (Egypt)", "Japanese (Japan", "JP)", "Spanish (El Salvador)", "Portuguese (Brazil)", "Icelandic (Iceland)", "Czech (Czech Republic)", "Polish (Poland)", "Catalan (Spain)", "Serbian (Serbia and Montenegro)", "Malay (Malaysia)", "Spanish (Spain)", "Spanish (Colombia)", "Bulgarian (Bulgaria)", "Serbian (Bosnia and Herzegovina)", "Spanish (Paraguay)", "Spanish (Ecuador)", "Spanish (United States)", "Arabic (Sudan)", "Romanian (Romania)", "English (Philippines)", "Arabic (Tunisia)", "Serbian (Latin", "Montenegro)", "Spanish (Guatemala)", "Korean (South Korea)", "Greek (Cyprus)", "Spanish (Mexico)", "Russian (Russia)", "Spanish (Honduras)", "Chinese (Hong Kong)", "Norwegian (Norway", "Nynorsk)", "Hungarian (Hungary)", "Thai (Thailand)", "Arabic (Iraq)", "Spanish (Chile)", "Arabic (Morocco)", "Irish (Ireland)", "Turkish (Turkey)", "Estonian (Estonia)", "Arabic (Qatar)", "Portuguese (Portugal)", "French (Luxembourg)", "Arabic (Oman)", "Albanian (Albania)", "Spanish (Dominican Republic)", "Spanish (Cuba)", "English (New Zealand)", "Serbian (Serbia)", "German (Switzerland)", "Spanish (Uruguay)", "Greek (Greece)", "Hebrew (Israel)", "English (South Africa)", "Thai (Thailand", "TH)", "French (France)", "German (Austria)", "Norwegian (Norway)", "English (Australia)", "Dutch (Netherlands)", "French (Canada)", "Latvian (Latvia)", "German (Luxembourg)", "Spanish (Costa Rica)", "Arabic (Kuwait)", "Arabic (Libya)", "Italian (Switzerland)", "German (Germany)", "Arabic (Algeria)", "Slovak (Slovakia)", "Lithuanian (Lithuania)", "Italian (Italy)", "English (Ireland)", "Chinese (Singapore)", "English (Canada)", "Dutch (Belgium)", "Chinese (China)", "Japanese (Japan)", "German (Greece)", "Serbian (Latin", "Serbia)", "English (India)", "Arabic (Lebanon)", "Spanish (Nicaragua)", "Macedonian (Macedonia)", "Belarusian (Belarus)", "Slovenian (Slovenia)", "Spanish (Peru)", "Indonesian (Indonesia)", "English (United Kingdom)" }));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 470, 1170, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -560,8 +594,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -576,8 +609,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(spinnerAgeMAX, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearchCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(btnSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -589,146 +622,24 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(btnNext)
                     .addComponent(btnLast))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkBoxConsiderAge)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel21)
+                        .addComponent(spinnerAgeMAX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearchCustomer))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel17)
-                        .addComponent(spinnerAgeMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21)
-                            .addComponent(spinnerAgeMAX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSearchCustomer))))
+                        .addComponent(spinnerAgeMIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(checkBoxConsiderAge)))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel16))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboRoomNumber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboMeal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCheckOutDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtCheckInDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboGender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboDocument, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboNationality, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(txtEmail)
-                            .addComponent(txtAdress, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPostcode, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtMobile)
-                            .addComponent(txtCustomerRef, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCustomerRef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(comboNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(txtDateOfBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(comboDocument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(txtCheckInDate, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel13))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCheckOutDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(comboRoomNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 354, 880, -1));
+
+        txtEmail.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 176, 145, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -914,8 +825,8 @@ public class MainWindow extends javax.swing.JFrame {
         }
         spinnerAgeMAX.setValue(ageMax);
         try {
-            List<Customer> list = customerDAO.search(regExp, considerAge, ageMin,
-                ageMax);
+            List<Customer> list = customerDAO.search(regExp, considerAge,
+                    ageMin, ageMax);
             tableCustomers.setModel(new TModelCustomer(list));
             if(list.isEmpty()){
                JOptionPane.showMessageDialog(
@@ -934,15 +845,18 @@ public class MainWindow extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             showSQLErrorMessage(ex);
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null,
+                    ex);
         } catch (ClassNotFoundException | IOException ex) {
             showErrorMessage(ex);
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null,
+                    ex);
         }
     }//GEN-LAST:event_btnSearchCustomerActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        int res = JOptionPane.showConfirmDialog(null, "Do you really want to close appliation",
+        int res = JOptionPane.showConfirmDialog(null, "Do you really want to"
+                + " close appliation",
                 "Close conformation", JOptionPane.YES_NO_OPTION);
         if(res == JOptionPane.YES_OPTION){
             System.exit(0);
@@ -1037,14 +951,8 @@ public class MainWindow extends javax.swing.JFrame {
         txtPostcode.setText(c.getPostCode());
         txtMobile.setText(c.getMobile());
         txtEmail.setText(c.getEmail());
-        
-        for(int i = 0; i < comboNationality.getItemCount(); ++i){
-            String currItem = (String)comboNationality.getItemAt(i);
-            if(currItem.equalsIgnoreCase(c.getNationality())){
-               comboNationality.setSelectedIndex(i);
-               break;
-            }
-        }
+        txtNationality.setText(c.getNationality());
+
         Calendar cal = Calendar.getInstance();
         java.util.Date dob = new java.util.Date(c.getDateOfBirth().getTime());
         txtDateOfBirth.setDate(dob);
@@ -1101,9 +1009,7 @@ public class MainWindow extends javax.swing.JFrame {
         txtPostcode.setText(null);
         txtMobile.setText(null);
         txtEmail.setText(null);
-        if(comboNationality.getItemCount() > 0){
-            comboNationality.setSelectedIndex(0);
-        }
+        txtNationality.setText(null);
         Calendar cal = Calendar.getInstance();
         txtDateOfBirth.setDate(cal.getTime());
         if(comboDocument.getItemCount() > 0){
@@ -1189,7 +1095,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox comboDocument;
     private javax.swing.JComboBox comboGender;
     private javax.swing.JComboBox comboMeal;
-    private com.toedter.components.JLocaleChooser comboNationality;
     private javax.swing.JComboBox comboRoomNumber;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1229,6 +1134,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtMobile;
+    private javax.swing.JTextField txtNationality;
     private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtSearchCustomer;
     private javax.swing.JTextField txtSubtotal;

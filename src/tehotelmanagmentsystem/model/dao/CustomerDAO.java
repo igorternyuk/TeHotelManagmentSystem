@@ -66,7 +66,7 @@ public class CustomerDAO implements DAO<Customer>{
     @Override
     public void update(Customer c) throws SQLException {
         cmd = con.prepareStatement("update customers set first_name = ?,"
-            + "surname = ?, address = ?, post_code = ?, mobile = ?,"
+            + "surname = ?, adress = ?, post_code = ?, mobile = ?,"
             + "email = ?, nationality = ?, date_of_birth = ?,"
             + "id_doc = ?, gender = ?, check_in_date = ?,"
             + "check_out_date = ?, meal = ?, room = ? where id_customer = ?;");

@@ -3,7 +3,7 @@
  * Created: Jun 18, 2017
  */
 
-create database db_hotel;
+/*create database db_hotel;
 use db_hotel;
 
 create table id_types(
@@ -27,18 +27,20 @@ create table customers (
     email varchar(40),
     nationality varchar(50),
     date_of_birth date,
-    doc_type int,
+    id_doc int not null,
     gender enum('M','F'),
     check_in_date date,
     check_out_date date,
     meal enum('NO_MEAL', 'ONE_MEAL', 'TWO_MEALS', 'THREE_MEALS'),
     room int not null,
-    foreign key(room) references room(id),
-    foreign key(id_type) references id_type(id)
+    foreign key(room) references rooms(id),
+    foreign key(id_doc) references id_types(id)
 );
 
-drop table customers;
+--drop table customers;
 
 select * from customers;
 
-select * from id_types;
+select * from id_types;*/
+
+select * from customers;
